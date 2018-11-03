@@ -27,4 +27,21 @@ export class BinaryService {
     console.log('====================================');
     return resultList;
   }
+
+  convertBinaryToDecimal(binary) {
+    return parseInt(binary, 2);
+  }
+
+  convertBinaryNotation(number) {
+    let binary = [];
+    while(number / 2 !== 0) {
+      binary.push(number % 2);
+      number = Math.floor(number/2);
+    }
+    let padding = 4 - binary.length;
+    for(let i = 0; i < padding; i++) {
+      binary.push('0');
+    }
+    return binary.reverse().join('');
+  }
 }

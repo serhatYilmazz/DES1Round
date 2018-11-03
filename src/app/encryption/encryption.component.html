@@ -3,42 +3,54 @@
       <form (ngSubmit)='onSubmit()' [formGroup]='messageForm'> 
         <div class="form-group">
           <label>Message</label>
-          <input type="text" class="form-control" formControlName='message'>
+          <input type="text" class="form-control" formControlName='message' >
         </div>
-        <button class="btn btn-primary">Submit</button>
+        <span class="help-block" *ngIf='!messageForm.valid && messageForm.touched'>Please enter 8 characters message</span>
+        <span class="help-block" *ngIf='key === "" && messageForm.touched'>Please generate a key first</span>
+        <button class="btn btn-primary" [disabled]='messageForm.get("message").error?.keyLengthException || !messageForm.valid || key === ""'>Submit</button>
       </form>
     </div>
   </div>
   <div class="row">
-    <div class="col-xs-6">
-      <h1>L0</h1>
-      <input type="text" class="form-control" [(ngModel)]='left' >
-    </div>
-    <div class="col-xs-6">
-      <h1>R0</h1>
-      <input type="text" class="form-control" [(ngModel)]='right' >
+    <div class="col-xs-12">
+      <app-initial-permutation></app-initial-permutation>
     </div>
   </div>
   <div class="row">
     <div class="col-xs-6">
+      <app-l0></app-l0>
     </div>
     <div class="col-xs-6">
-      <h1>Expansion Permutation</h1>
-      <input type="text" class="form-control" [(ngModel)]='expansionPermutation' >
+      <app-r0></app-r0>
     </div>
   </div>
+  
   <div class="row" >
-    <div class="col-xs-6">
-    </div>
-    <div class="col-xs-6" 
-      style="border-radius: 20px; margin-top: 10px; padding: 20px; background-color: #ebf7e6;"
+    <div class="col-xs-4" 
+      style="border-radius: 20px; margin-top: 120px; padding: 20px; background-color: #ebf7e6;"
       [ngClass]='{"approved": keyReq.get("key").errors?.keyLengthTruth}' >
       <h1>Key</h1>
       <form (ngSubmit)='getKey()' [formGroup]='keyReq'>
         <div class="form-group">
           <input type="text" class="form-control" formControlName='key' [ngClass]='{"approved": keyReq.get("key").errors?.keyLengthTruth}'>
         </div>
-        <button class="btn btn-info" [disabled]='keyReq.get("key").errors?.keyLengthException'>Get Key</button>  
+        <span class="help-block" *ngIf='keyReq.get("key").errors?.keyLengthException && keyReq.dirty && !keyReq.get("key").errors?.keyLengthTruth'>Please enter 8 characters long key</span>
+        <button class="btn btn-info" [disabled]='keyReq.get("key").errors?.keyLengthException'>Find the First Round Key</button>  
       </form>
     </div>
+    <div class="col-xs-8">
+        <app-f-function></app-f-function>
+    </div>
   </div>
+  <div class="row">
+    <div class="col-xs-12">
+      <app-outer-xor></app-outer-xor>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-xs-12">
+      <app-end-of-round></app-end-of-round>
+    </div>
+  </div>
+
+  <div style="margin-bottom: 200px;"></div>
