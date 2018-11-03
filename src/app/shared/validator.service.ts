@@ -12,4 +12,10 @@ export class ValidatorService {
             return { 'keyLengthTruth': true };
         }
     }
+
+    keyLengthForKeyService(control: FormControl): { [s: string]: boolean } {
+        if(control.value.length === 8) {
+            return { 'keyLengthTruth': true };
+        }
+    }
 }

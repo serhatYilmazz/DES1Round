@@ -1,12 +1,12 @@
 import { Injectable } from '@angular/core';
 import { BinaryService } from '../binary.service';
 import { Subject } from '../../../node_modules/rxjs';
+import { KeyGenerator } from '../shared/key-generator.service';
 
 @Injectable()
 export class KeyService {
 
   permutedChoiceOneSubject = new Subject<String[]>();
-  permutedChoiceTwoSubject = new Subject<String[]>();
   left = new Subject<String[]>();
   right = new Subject<String[]>();
   leftShifted = new Subject<String[]>();
@@ -35,7 +35,9 @@ export class KeyService {
    ]
 
   
-  constructor(private binaryService: BinaryService) { }
+  constructor(
+    private binaryService: BinaryService,
+    private keyGenerator: KeyGenerator) { }
 
   permutation(permutationMatrix, elements: Array<String>) {
     let permutatedString = [];
@@ -55,8 +57,7 @@ export class KeyService {
     console.log(left);
     console.log('===============RIGHT=====================');
     console.log(right);
-    this.left.next(left);
-    this.right.next(right);
+    
     return {left: left, right: right};
   }
 
@@ -74,7 +75,7 @@ export class KeyService {
     let combinedKey = leftShiftedKey.concat(rightShiftedKey);
     console.log('===============COMBINED KEYS=====================');
     console.log(combinedKey);
-    this.combined.next(combinedKey);
+   
     return combinedKey;
   }
 
@@ -83,19 +84,21 @@ export class KeyService {
     this.permutedChoiceOneSubject.next(_56bitKey);
 
     let halvedKey = this.halveTheKey(_56bitKey);
+    this.left.next(halvedKey.left);
+    this.right.next(halvedKey.right);
 
     let leftShiftedKey = this.leftShift(halvedKey.left, 'LEFT');
     let rightShiftedKey = this.leftShift(halvedKey.right, 'RIGHT');
-
     this.leftShifted.next(leftShiftedKey);
     this.rightShifted.next(rightShiftedKey);
 
     let combinedKey = this.combineKeys(leftShiftedKey, rightShiftedKey);
+    this.combined.next(combinedKey);
 
     let permutedChoiceTwo = this.permutation(this.permutedChoiceTwoMatrix, combinedKey);
-    this.permutedChoiceTwoSubject.next(permutedChoiceTwo);
+    this.keyGenerator.changeBinaryKey(permutedChoiceTwo);
     
-
+    return permutedChoiceTwo;
   }
   
 }

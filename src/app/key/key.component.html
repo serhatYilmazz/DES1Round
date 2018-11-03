@@ -3,48 +3,37 @@
     <form (ngSubmit)='onSubmit()' [formGroup]='keyForm'> 
       <div class="form-group">
         <label>Key</label>
-        <input type="text" class="form-control" formControlName='key'>
+        <input type="text" class="form-control" formControlName='key' [ngClass]='{"approved": keyForm.get("key").errors?.keyLengthTruth}'>
       </div>
-      <button class="btn btn-primary">Submit</button>
+      <button type="submit" class="btn btn-primary" [disabled]='keyForm.get("key").errors?.keyLengthException'>Find the First Round Key</button>
     </form>
   </div>
 </div>
+<app-permuted-choice-one></app-permuted-choice-one>
 <div class="row">
-  <div class="col-xs-12">
-    <h1>PERMUTED CHOICE</h1>
-    <input type="text" [(ngModel)]='permutedChoiceOne' class="form-control">
+  <div class="col-xs-6">
+    <app-left></app-left>
+  </div>
+  <div class="col-xs-6">
+    <app-right></app-right>
   </div>
 </div>
 <div class="row">
   <div class="col-xs-6">
-    <h1>LEFT</h1>
-    <input type="text" [(ngModel)]='left' class="form-control">
+     <app-left-shift></app-left-shift>
   </div>
   <div class="col-xs-6">
-    <h1>RIGHT</h1>
-    <input type="text" [(ngModel)]='right' class="form-control">
-  </div>
-</div>
-<div class="row">
-  <div class="col-xs-6">
-    <h1>LEFT (SHIFTED)</h1>
-    <input type="text" [(ngModel)]='leftShifted' class="form-control">
-  </div>
-  <div class="col-xs-6">
-    <h1>RIGHT (SHIFTED)</h1>
-    <input type="text" [(ngModel)]='rightShifted' class="form-control">
+    <app-right-shift></app-right-shift>
   </div>
 </div>
 <div class="row">
   <div class="col-xs-12">
-    <h1>COMBINED</h1>
-    <input type="text" [(ngModel)]='combined' class="form-control">
+    <app-combine></app-combine>
   </div>
 </div>
 <div class="row">
   <div class="col-xs-12">
-    <h1>PermutedChoiceTwo</h1>
-    <input type="text" [(ngModel)]='permutedChoiceTwo' class="form-control">
+    <app-permuted-choice-two></app-permuted-choice-two>
   </div>
 </div>
 <div style="margin-bottom: 60px;"></div>
