@@ -1,0 +1,44 @@
+<div class="row">
+    <div class="col-xs-12">
+      <form (ngSubmit)='onSubmit()' [formGroup]='messageForm'> 
+        <div class="form-group">
+          <label>Message</label>
+          <input type="text" class="form-control" formControlName='message'>
+        </div>
+        <button class="btn btn-primary">Submit</button>
+      </form>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-xs-6">
+      <h1>L0</h1>
+      <input type="text" class="form-control" [(ngModel)]='left' >
+    </div>
+    <div class="col-xs-6">
+      <h1>R0</h1>
+      <input type="text" class="form-control" [(ngModel)]='right' >
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-xs-6">
+    </div>
+    <div class="col-xs-6">
+      <h1>Expansion Permutation</h1>
+      <input type="text" class="form-control" [(ngModel)]='expansionPermutation' >
+    </div>
+  </div>
+  <div class="row" >
+    <div class="col-xs-6">
+    </div>
+    <div class="col-xs-6" 
+      style="border-radius: 20px; margin-top: 10px; padding: 20px; background-color: #ebf7e6;"
+      [ngClass]='{"approved": keyReq.get("key").errors?.keyLengthTruth}' >
+      <h1>Key</h1>
+      <form (ngSubmit)='getKey()' [formGroup]='keyReq'>
+        <div class="form-group">
+          <input type="text" class="form-control" formControlName='key' [ngClass]='{"approved": keyReq.get("key").errors?.keyLengthTruth}'>
+        </div>
+        <button class="btn btn-info" [disabled]='keyReq.get("key").errors?.keyLengthException'>Get Key</button>  
+      </form>
+    </div>
+  </div>

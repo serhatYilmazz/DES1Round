@@ -1,0 +1,50 @@
+<div class="row">
+  <div class="col-xs-12">
+    <form (ngSubmit)='onSubmit()' [formGroup]='keyForm'> 
+      <div class="form-group">
+        <label>Key</label>
+        <input type="text" class="form-control" formControlName='key'>
+      </div>
+      <button class="btn btn-primary">Submit</button>
+    </form>
+  </div>
+</div>
+<div class="row">
+  <div class="col-xs-12">
+    <h1>PERMUTED CHOICE</h1>
+    <input type="text" [(ngModel)]='permutedChoiceOne' class="form-control">
+  </div>
+</div>
+<div class="row">
+  <div class="col-xs-6">
+    <h1>LEFT</h1>
+    <input type="text" [(ngModel)]='left' class="form-control">
+  </div>
+  <div class="col-xs-6">
+    <h1>RIGHT</h1>
+    <input type="text" [(ngModel)]='right' class="form-control">
+  </div>
+</div>
+<div class="row">
+  <div class="col-xs-6">
+    <h1>LEFT (SHIFTED)</h1>
+    <input type="text" [(ngModel)]='leftShifted' class="form-control">
+  </div>
+  <div class="col-xs-6">
+    <h1>RIGHT (SHIFTED)</h1>
+    <input type="text" [(ngModel)]='rightShifted' class="form-control">
+  </div>
+</div>
+<div class="row">
+  <div class="col-xs-12">
+    <h1>COMBINED</h1>
+    <input type="text" [(ngModel)]='combined' class="form-control">
+  </div>
+</div>
+<div class="row">
+  <div class="col-xs-12">
+    <h1>PermutedChoiceTwo</h1>
+    <input type="text" [(ngModel)]='permutedChoiceTwo' class="form-control">
+  </div>
+</div>
+<div style="margin-bottom: 60px;"></div>

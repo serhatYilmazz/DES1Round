@@ -1,0 +1,13 @@
+input.ng-invalid.ng-touched {
+    border: 1px solid red;
+}
+
+input.ng-invalid.ng-touched.approved {
+    border: 1px solid green;
+}
+
+.approved {
+    border: 1px solid green;
+    color: green;
+    background-color: #c7e2bc;
+}
