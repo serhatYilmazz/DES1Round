@@ -28,10 +28,8 @@ export class EncryptionComponent implements OnInit, OnDestroy {
     private keyGenerator: KeyGenerator) { }
 
   ngOnInit() {
-    // this.key = this.keyGenerator.getBinaryKey();
-    // this.message = this.keyGenerator.getMessage();
-    this.key = this.keyService.getKey('21607858').join('');
-    this.message = 'serhatyi';
+    this.key = this.keyGenerator.getBinaryKey();
+    this.message = this.keyGenerator.getMessage();
     this.messageForm = new FormGroup({
       message: new FormControl(this.message, [this.validator.keyLengthError.bind(this), Validators.required])
     });
