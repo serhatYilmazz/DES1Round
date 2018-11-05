@@ -7,7 +7,7 @@
         </div>
         <span class="help-block" *ngIf='!messageForm.valid && messageForm.touched'>Please enter 8 characters message</span>
         <span class="help-block" *ngIf='key === "" && messageForm.touched'>Please generate a key first</span>
-        <button class="btn btn-primary" [disabled]='messageForm.get("message").error?.keyLengthException || !messageForm.valid || key === ""'>Submit</button>
+        <button class="btn btn-primary" [disabled]='messageForm.get("message").errors?.keyLengthException || !messageForm.valid || key === ""'>Submit</button>
       </form>
     </div>
   </div>
