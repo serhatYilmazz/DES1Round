@@ -19,6 +19,7 @@ export class EncryptionService {
   outerPermutation = new Subject<String[]>();
   outerXor = new Subject<String[]>();
   endOfTheRound = new Subject<String[]>();
+  resultText = new Subject<String[]>();
 
   initialPermutationMatrix = [
     58, 50, 42, 34, 26, 18, 10, 2,
@@ -146,6 +147,9 @@ export class EncryptionService {
 
     let endOfTheRound = halvedKey.left.concat(lastXor);
     this.endOfTheRound.next(endOfTheRound);
+
+    let resultText = this.binaryService.convertBinaryToASCIItext(endOfTheRound);
+    this.resultText.next(resultText);
   }
 
   permutation(permutationMatrix, elements: Array<String>) {
@@ -192,9 +196,9 @@ export class EncryptionService {
     let totalMatrix = [];
 
     for(let i = 1; i <= 8; i++) {
-      let row = "" + numberMatrix[5] + numberMatrix[0];
+      let row = "" + numberMatrix[0] + numberMatrix[5];
       let rowDecimal = this.binaryService.convertBinaryToDecimal(row);
-      let column = "" + numberMatrix[4] + numberMatrix[3] + numberMatrix[2] + numberMatrix[1];
+      let column = "" + numberMatrix[1] + numberMatrix[2] + numberMatrix[3] + numberMatrix[4];
       let columnDecimal = this.binaryService.convertBinaryToDecimal(column);
       totalMatrix.push(this.sBoxExchange(columnDecimal, rowDecimal, this.sBoxConfiguration[i]));
       numberMatrix.splice(0, 6);
