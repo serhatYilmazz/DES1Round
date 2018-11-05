@@ -17,9 +17,11 @@ export class EncryptionComponent implements OnInit, OnDestroy {
   keyReq: FormGroup;
 
   keySubscription: Subscription;
+  endSubscription: Subscription;
   
   key: String;
   message: String;
+  resultText: String;
   
   constructor(
     private encryptionService: EncryptionService, 
@@ -31,17 +33,19 @@ export class EncryptionComponent implements OnInit, OnDestroy {
     this.key = this.keyGenerator.getBinaryKey();
     this.message = this.keyGenerator.getMessage();
     this.messageForm = new FormGroup({
-      message: new FormControl(this.message, [this.validator.keyLengthError.bind(this), Validators.required])
+      message: new FormControl("", [this.validator.keyLengthError.bind(this), Validators.required])
     });
     
-  
-
     this.keyReq = new FormGroup({
       key: new FormControl(this.key, [Validators.required, this.validator.keyLengthError.bind(this), this.validator.keyLengthApprovment.bind(this)])
     });
 
     this.keySubscription = this.keyGenerator.binaryKeyChanged.subscribe(
       data => this.key = data.join('')
+    );
+
+    this.endSubscription = this.encryptionService.resultText.subscribe(
+      data => this.resultText = data.join('')
     );
   }
 

@@ -2,6 +2,12 @@
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 6.2.4.
 
+# Program Logic
+
+To reach main resource of the program, follow: src -> app.
+Key Generation issues are done under src -> app -> key -> key.service.ts file.
+Encryption issues by using the generated key are done under src -> app -> encryption -> encryption.service.ts file.
+
 ## Development server
 
 Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.

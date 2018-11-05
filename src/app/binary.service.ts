@@ -44,4 +44,14 @@ export class BinaryService {
     }
     return binary.reverse().join('');
   }
+
+  convertBinaryToASCIItext(binaryText){
+    var binaryCode = [];
+    binaryText = binaryText.join('').match(/.{1,8}/g).join(" ");
+    var newBinary = binaryText.split(" ");
+    for (let i = 0; i < binaryText.length; i++) {
+        binaryCode.push(String.fromCharCode(parseInt(newBinary[i], 2)));
+    }
+    return binaryCode;
+  }
 }
